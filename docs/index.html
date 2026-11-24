@@ -13,7 +13,127 @@
 <link rel="icon" href="assets/logo.png">
 <link rel="preload" href="assets/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/ledger.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Dataset", "name": "The Said & Done Ledger", "alternateName": "The Said & Done Ledger by Africa's Protopia", "description": "What African AI was promised, and what got built: announced vs. deployed capital, compute online, startup counts, national AI strategies, and a register of contested figures with the reason each pair diverges.", "url": "https://ledger.protopia.africa/", "version": "1.0", "dateModified": "2026-11-16", "spatialCoverage": "Africa", "isAccessibleForFree": true, "creator": {"@type": "Organization", "name": "Africa's Protopia", "url": "https://africasprotopia.substack.com"}}</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://ledger.protopia.africa/#organization",
+   "name": "Africa's Protopia",
+   "url": "https://africasprotopia.substack.com",
+   "description": "Africa's Protopia follows sovereign African AI from announcement to deployment, and the people turning African opportunities into working systems.",
+   "logo": "https://ledger.protopia.africa/assets/logo.png",
+   "sameAs": [
+    "https://africasprotopia.substack.com",
+    "https://ledger.protopia.africa/"
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://ledger.protopia.africa/#ivan-irakoze",
+   "name": "Ivan Irakoze",
+   "url": "https://substack.com/@ivanirakoze",
+   "sameAs": [
+    "https://substack.com/@ivanirakoze",
+    "https://www.linkedin.com/in/ivan-irakoze/"
+   ]
+  },
+  {
+   "@type": "Dataset",
+   "@id": "https://ledger.protopia.africa/#dataset",
+   "name": "The Said & Done Ledger",
+   "alternateName": "The Said & Done Ledger by Africa's Protopia",
+   "description": "What African AI was promised, and what got built: announced vs. deployed capital, compute online, startup counts, national AI strategies, and a register of contested figures with the reason each pair diverges.",
+   "url": "https://ledger.protopia.africa/",
+   "version": "1.0",
+   "dateModified": "2026-11-16",
+   "spatialCoverage": "Africa",
+   "isAccessibleForFree": true,
+   "creator": {
+    "@id": "https://ledger.protopia.africa/#ivan-irakoze"
+   },
+   "publisher": {
+    "@id": "https://ledger.protopia.africa/#organization"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://ledger.protopia.africa/#faq",
+   "url": "https://ledger.protopia.africa/",
+   "about": {
+    "@id": "https://ledger.protopia.africa/#dataset"
+   },
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "How much AI investment has actually been deployed in Africa?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Announced continental AI commitments exceed US$70bn. Verifiable deployed AI-specific capital, including infrastructure capex, is on the order of US$1–2bn. Most of what is deployed is corporate infrastructure spending (Cassava, Google, Microsoft South Africa, the Nigerian data centres) and philanthropic programme money (Gates, IDRC, UNDP)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How many African AI startups are active?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "TechCabal Insights, analysing Dr Chinasa T. Okolo's dataset, tracked 207 AI companies across 17 countries in 2025, and 86% are still active. Nigeria (50), South Africa (49) and Kenya (31) hold 63% of them. Other counts differ by definition: StartupList finds 159, and AfriLabs reports 2,400+ under a much looser test."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Why do published figures on African AI disagree?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Mostly because sources count different things. Egypt has 11 AI-first startups or 44 AI-enabled ones. Partech puts 2025 venture capital at US$4.1bn and AVCA at US$3.9bn because of deal-inclusion rules. The IMF gives about 160 and 213 data centres on the same page, from two sources. The Ledger keeps both numbers and says why they diverge."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Has the US$60bn Africa AI Fund raised any money?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No legal vehicle, capital call or first close has been found. In Accra in September 2026, Smart Africa cited US$18.7bn; its own written post describes that as a blended finance architecture. Public reporting reviewed as of 2 October 2026 gives no breakdown of money committed or paid in, so the Ledger carries it as structure, not capital."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How much data-centre capacity does Africa have?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The IMF puts sub-Saharan Africa's installed IT capacity at about 0.4 GW, under 1% of the global total. The African Data Centres Association counts 360 MW active and 0.6% of global. Capacity is expected to roughly triple to about 1.2 GW by 2030 with no gain in global share; the United States alone holds close to 45%."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Which African countries have a national AI strategy?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "At least 16 have published or adopted one, including Mauritius (2018, Africa's first), Rwanda, Senegal, Egypt, Kenya, Nigeria and Ghana. The DRC, Uganda, Tanzania and others are drafting. South Africa withdrew its draft policy in April 2026. The African Union endorsed a Continental AI Strategy in July 2024."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How much funding goes to women-led African startups?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Startups with a female CEO received 2.2% of funding in 2025, the lowest share since tracking began in 2019, according to Africa: The Big Deal. In Q1–Q3 2026 the share was 5.4%, or about 2% without one large deal. Meanwhile 19.2% of startups have at least one female co-founder."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How is the Said & Done Ledger sourced and updated?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No figure enters the Ledger without a source, and contested figures are never silently reconciled: both numbers stay, with the reason they diverge. The Ledger is updated quarterly. Replaced figures stay on the page, struck through, and every version keeps its own address."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the Ledger</a>
@@ -23,6 +143,7 @@
     <h1>The Said &amp; Done Ledger</h1>
     <p class="dek">What African AI was promised, and what got built.</p>
     <p class="stamp"><span class="ver">v1.0</span> <span>Data as of 16 November 2026</span> <span>Updated quarterly</span></p>
+    <p class="updated">Last updated <time datetime="2026-11-16">16 November 2026</time></p>
     
   </div>
 </header>
@@ -37,12 +158,13 @@
 <li><a href="#6-the-gender-capital-gap">6. The gender-capital gap</a></li>
 <li><a href="#7-the-unresolved-register">7. The Unresolved Register</a></li>
 <li><a href="#8-the-counterweight-what-the-optimism-has-to-answer">8. The counterweight — what the optimism has to answer</a></li>
-<li><a href="#9-origins-the-history-behind-the-numbers">9. Origins — the history behind the numbers</a></li><li><a href="#changelog">Changelog</a></li></ol>
+<li><a href="#9-origins-the-history-behind-the-numbers">9. Origins — the history behind the numbers</a></li><li><a href="#faq">Frequently asked questions</a></li><li><a href="#changelog">Changelog</a></li></ol>
     <a class="subscribe" href="https://africasprotopia.substack.com/subscribe">Get each update by email</a>
   </nav>
   <main id="main">
     <div class="rule"><p><strong>Our rule.</strong> No figure enters this Ledger without a source. No contested figure is silently reconciled — both numbers stay, with a one-line read on <em>why</em> they diverge. A neutral table of conflicting numbers reads as confusion rather than rigour; the divergence explanation is what converts honesty into authority.</p></div>
     <h2 id="1-announced-vs-deployed-the-headline-gap">1. Announced vs. deployed — the headline gap<a class="headerlink" href="#1-announced-vs-deployed-the-headline-gap" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, announced continental AI commitments in Africa exceed US$70bn, while verifiable deployed AI-specific capital, including infrastructure capex, is on the order of US$1–2bn. The two largest announcements, the US$60bn Africa AI Fund and the AfDB–UNDP US$10bn initiative, show no verifiable deployment.</p>
 <p><strong>The single most important number in this Ledger:</strong> announced continental AI commitments <strong>exceed US$70bn</strong>. Verifiable <em>deployed</em> AI-specific capital, including infrastructure capex, is <strong>on the order of US$1–2bn</strong>.</p>
 <h3 id="announced-commitments">Announced commitments<a class="headerlink" href="#announced-commitments" title="Link to this section">#</a></h3>
 <div class="table-wrap"><table class="cols-4">
@@ -270,6 +392,7 @@
 </div><p><em>22 Dec = 90 days after PAAIS closed, per Christabel Danso's <a href="https://thebftonline.com/article/after-the-applause-ai-leadership-is-about-what-happens-next" target="_blank" rel="noopener">90-day test</a>. Next event: Africa Tech Festival, Cape Town, 17–19 Nov 2026.</em></p>
 <p><strong>Ledger read:</strong> the deployed column is dominated by <em>corporate infrastructure capex</em> (Cassava, Google, Microsoft SA, the Nigerian data centres) and <em>philanthropic programme money</em> (Gates, IDRC, UNDP). The two largest headline numbers — the US$60bn fund and the US$10bn initiative — account for <strong>US$70bn of announcements and no verifiable deployment</strong>.</p>
 <h2 id="2-the-startup-count">2. The startup count<a class="headerlink" href="#2-the-startup-count" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, citing TechCabal Insights' April 2026 analysis of Dr Chinasa T. Okolo's dataset, 207 AI companies were tracked across 17 African countries in 2025, up from 104 in 2022. 86% are still active, 73% of the 2022 cohort survived three years, and Nigeria, South Africa and Kenya hold 63% of the total.</p>
 <p>Baseline: <strong>207 AI companies tracked across 17 countries</strong>.</p>
 <p><em>Source for this section: <a href="https://insights.techcabal.com/africas-ai-builders-207-startups-and-one-continents-bet/" target="_blank" rel="noopener">TechCabal Insights, <em>Africa's AI Builders</em>, April 2026</a>, analysing Dr Chinasa T. Okolo's <a href="https://doi.org/10.7910/DVN/Z0PKGO" target="_blank" rel="noopener">Harvard Dataverse dataset</a>.</em></p>
 <div class="table-wrap"><table class="cols-2">
@@ -315,6 +438,7 @@
 <p><strong>Vertical movement.</strong> Software Development (48) functions partly as a catch-all. The real vertical story: Finance 22 · Agriculture 20 · Healthcare 20 · Education 14 — 37% of total. <strong>Education grew 2 → 14. Legal AI went 0 → 6</strong>, three of them in Nigeria, all founded 2024–25. Egypt grew 3 → 11 (+267%).</p>
 <p><strong>Next update:</strong> TechCabal's annual refresh, expected ~April 2027.</p>
 <h2 id="3-compute-announced-vs-online">3. Compute — announced vs. online<a class="headerlink" href="#3-compute-announced-vs-online" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, citing the IMF's July 2026 paper on sub-Saharan Africa, installed data-centre IT capacity is about 0.4 GW, under 1% of the global total. The African Data Centres Association counts 360 MW active, 0.6% of global. Capacity roughly triples to about 1.2 GW by 2030, but the global share stays flat.</p>
 <p><em>Primary source: IMF, <a href="https://www.imf.org/en/publications/departmental-papers-policy-papers/issues/2026/07/13/unlocking-the-potential-ai-in-sub-saharan-africa-576489" target="_blank" rel="noopener"><em>Unlocking the Potential: AI in Sub-Saharan Africa</em></a>, Departmental Paper, 13 Jul 2026, team led by Martin Schindler and Andrew Tiffin. </em><em>Page numbers below are printed page numbers, verified page by page.</em>**</p>
 <h3 id="the-unit-problem-stated-first">The unit problem, stated first<a class="headerlink" href="#the-unit-problem-stated-first" title="Link to this section">#</a></h3>
 <p>Africa's compute is quoted in three different units, and they tell three different stories. Quote the wrong one and the continent looks four to nine times better supplied than it is.</p>
@@ -602,6 +726,7 @@
 </table>
 </div><p><strong>Headline-target sum:</strong> about <strong>970MW</strong> with Nexus's April 500MW, or <strong>~650MW</strong> with its October 180MW; about 820MW of it sits on rungs 1 and 2. The two facilities serving customers haven't published a megawatt figure.</p>
 <h2 id="4-national-ai-strategy-status">4. National AI strategy status<a class="headerlink" href="#4-national-ai-strategy-status" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, at least 16 African countries have published or adopted a national AI strategy, starting with Mauritius in 2018, while the DRC, Uganda, Tanzania and others are still drafting. South Africa is the notable gap: its draft policy was withdrawn in April 2026, and iAfrica reports a redraft isn't expected before end-March 2027.</p>
 <p><strong>Published / adopted (16+):</strong> Mauritius (2018 — Africa's first) · Rwanda (2022/23) · Benin (2023) · Senegal (2023) · Côte d'Ivoire (SNIA 2030, 2024) · Ethiopia (2024) · Egypt (2025–30) · Kenya (2025–30) · Zambia (2024–26) · Namibia (2025) · Zimbabwe (2026–30) · Nigeria · Tunisia · Algeria · Ghana · Lesotho</p>
 <p><strong>Drafting / under development:</strong> DRC (Oct 2025) · Gabon · Congo-Brazzaville · Togo · Uganda · Tanzania (draft 2025) · Mozambique (Dec 2025) · Sierra Leone (2026) · Chad · Botswana</p>
 <p><strong>No confirmed standalone strategy:</strong> Malawi · Madagascar · Mali · Angola (folded into digital strategy) · Sudan · Libya</p>
@@ -611,6 +736,7 @@
 <p><strong>First sub-regional convergence:</strong> on 6 July 2026, Benin, Burkina Faso, Côte d'Ivoire, Guinea, Mali and Senegal adopted shared AI governance guidelines led by Niyel (<a href="https://iafrica.com/six-francophone-west-african-countries-adopt-shared-ai-governance-framework/" target="_blank" rel="noopener">iAfrica</a>).</p>
 <p><strong>Ministries and laws:</strong> on 16 Oct 2026 Morocco's king appointed Ahmed Rahhou Minister of Artificial Intelligence, Digital Transformation and Administrative Reform (<a href="https://techreviewafrica.com/news/7773/morocco-appoints-ahmed-rahhou-as-minister-of-artificial-intelligence-digital-transformation-and-administration-reform" target="_blank" rel="noopener">TechReview Africa</a>). In Kenya, a Senate committee recommended in October 2026 that the AI Bill 2026 not proceed, over penalties it said could stifle local innovation (<a href="https://techweez.com/2026/10/16/kenya-ai-bill-2026-rejected/" target="_blank" rel="noopener">Techweez</a>).</p>
 <h2 id="5-the-capital-picture">5. The capital picture<a class="headerlink" href="#5-the-capital-picture" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, citing Partech, total continental venture capital raised was US$4.1bn in 2025, up 25%; AVCA counts US$3.9bn. Q1–Q3 2026 brought US$2.16bn, about 4% below a year earlier, per Africa: The Big Deal. Dedicated AI venture capital is small: Enza Capital's AI Africa Fund reached a US$21m first close.</p>
 <div class="table-wrap"><table class="cols-3">
 <thead>
 <tr>
@@ -654,6 +780,7 @@
 <p><strong>The structural warning.</strong> <a href="https://allafrica.com/stories/202601250064.html" target="_blank" rel="noopener">Partech</a> observed a shift toward later-stage deployment while early-stage stays constrained; Norrsken22's Lexi Novitske said secondaries "could be something that we have to look at" (<a href="https://www.semafor.com/article/08/05/2026/exit-pressures-push-african-investors-to-later-stage-startups" target="_blank" rel="noopener">Semafor</a>). Launch Africa: <em>"If nobody writes that cheque in 2026, there's no Series A class in 2029"</em> (<a href="https://techcabal.com/2026/07/20/launch-africa-h1-2026/" target="_blank" rel="noopener">TechCabal</a>).</p>
 <p><strong>The benchmark exit:</strong> InstaDeep → BioNTech, 2023. Upfront ~£362m cash and shares plus up to ~£200m milestones; Bloomberg valued it at <strong>as much as £562m (US$684m)</strong> (<a href="https://www.bloomberg.com/news/articles/2023-01-10/biontech-said-to-buy-ai-experts-instadeep-for-up-to-562-million" target="_blank" rel="noopener">Bloomberg</a>). Still the only nine-figure African AI exit.</p>
 <h2 id="6-the-gender-capital-gap">6. The gender-capital gap<a class="headerlink" href="#6-the-gender-capital-gap" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, citing Africa: The Big Deal, startups with a female CEO received 2.2% of African startup funding in 2025, the lowest share since tracking began in 2019, and 5.4% in Q1–Q3 2026, about 2% without one large deal. Yet 19.2% of startups have at least one female co-founder, per Disrupt Africa.</p>
 <p><em>Sources: <a href="https://thebigdeal.substack.com/p/gender25" target="_blank" rel="noopener">Africa: The Big Deal, Jan 2026</a> and <a href="https://thebigdeal.substack.com/p/q32026c" target="_blank" rel="noopener">Oct 2026</a>; <a href="https://insights.techcabal.com/what-must-happen-for-women-led-african-startups-to-record-gains/" target="_blank" rel="noopener">TechCabal Insights</a>; <a href="https://disruptafrica.com/2026/07/31/africas-startup-space-is-moving-in-right-direction-when-it-comes-to-gender-diversity/" target="_blank" rel="noopener">Disrupt Africa, Jul 2026</a>.</em></p>
 <div class="table-wrap"><table class="cols-2">
 <thead>
@@ -691,6 +818,7 @@
 </table>
 </div><p><strong>What holds:</strong> representation is climbing (19.2% with a female co-founder) while the capital share stays low: 2.2% to female CEOs in 2025, and about 2% in Q1–Q3 2026 once one large deal is set aside (5.4% with it). The problem is <strong>depth of cheque, not presence of founders</strong>. Correctives: Janngo Capital (Fatoumata Bâ); Madica, which set out to build a portfolio with at least 50% gender diversity in leadership teams (<a href="https://www.madica.vc/blog/madica-welcomes-new-startups-to-its-investment-program-expands-north-african-footprint" target="_blank" rel="noopener">Madica</a>).</p>
 <h2 id="7-the-unresolved-register">7. The Unresolved Register<a class="headerlink" href="#7-the-unresolved-register" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, when published figures on African AI conflict, its Unresolved Register keeps both numbers and gives a one-line reason they diverge. One example: the IMF's July 2026 paper counts about 160 data centres in sub-Saharan Africa in its prose and 213 in a figure on the same page, from two different sources.</p>
 <p><em>Both numbers stay. Each row carries the reason they diverge.</em></p>
 <div class="table-wrap"><table class="cols-4">
 <thead>
@@ -836,6 +964,7 @@
 <li><strong>Cameroon, Gabon, Congo-Brazzaville, Chad, CAR, Equatorial Guinea, Burundi, South Sudan, Somalia, Eritrea, Guinea-Bissau, Sierra Leone, Liberia, Gambia, Lesotho, Eswatini, Comoros, Djibouti</strong> — no verifiable AI-specific investor, fund or accelerator with deployed capital found. Programme participation ≠ investment.</li>
 </ul>
 <h2 id="8-the-counterweight-what-the-optimism-has-to-answer">8. The counterweight — what the optimism has to answer<a class="headerlink" href="#8-the-counterweight-what-the-optimism-has-to-answer" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, citing the IMF's July 2026 paper, AI lifts sub-Saharan African productivity by about 0.2% under current conditions, about 0.4% of GDP cumulatively over a decade, against 2.1% and about 4% under high adoption. Lead author Martin Schindler called the current-conditions figure "little more than a rounding error."</p>
 <p><strong>The IMF's estimate</strong> (<em>Unlocking the Potential: AI in Sub-Saharan Africa</em>, 21 Jul 2026):</p>
 <p><em>Source: <a href="https://www.imf.org/en/publications/departmental-papers-policy-papers/issues/2026/07/13/unlocking-the-potential-ai-in-sub-saharan-africa-576489" target="_blank" rel="noopener">IMF</a>; summary via <a href="https://www.imf.org/en/news/articles/2026/07/21/cf-africa-can-grow-faster-with-ai-if-it-moves-now" target="_blank" rel="noopener">IMF news</a>.</em></p>
 <div class="table-wrap"><table class="cols-3">
@@ -863,6 +992,7 @@
 <p><strong>The dependency critique.</strong> <a href="https://restofworld.org/2026/africa-ai-sovereignty-big-tech/" target="_blank" rel="noopener">Rest of World</a> (May 2026) documented how far African open-source AI initiatives depend on Meta grants and Google Cloud. On the Anthropic–Rwanda MoU specifically, Ayantola Alayande (Global Center on AI Governance) called it "about adoption, really, rather than building local capacity" and "a nice way to put market capture", warning of vendor lock-in (<a href="https://www.devex.com/news/is-anthropic-building-rwanda-s-ai-future-or-its-dependence-111946" target="_blank" rel="noopener">Devex, Mar 2026</a>).</p>
 <p><strong>The deployment critique.</strong> Stephen Deng (DFS Lab), responding to the IMF paper: calling for a revolution in long-tail AI use while naming venture capital as a core funder, without addressing ability and willingness to pay, <em>"is simply promoting the more efficient distribution of fragility"</em> (<a href="https://x.com/mrstephendeng/status/2080715501098164397" target="_blank" rel="noopener">Deng on X</a>; <a href="https://insights.techcabal.com/ai-productivity-in-africa-what-the-imfs-0-2-forecast-really-means/" target="_blank" rel="noopener">TechCabal Insights</a>).</p>
 <h2 id="9-origins-the-history-behind-the-numbers">9. Origins — the history behind the numbers<a class="headerlink" href="#9-origins-the-history-behind-the-numbers" title="Link to this section">#</a></h2>
+<p class="answer">According to the Said &amp; Done Ledger v1.0, drawing on The Foundations of African AI by Africa's Protopia, today's capital, compute and startups sit on three earlier eras: The Wire (1994–2009), The Signal (2003–2011) and The Naming (2013–2019), when institutions such as the Deep Learning Indaba and AMMI gave the field its name.</p>
 <p>Everything above is 2025–26 data. None of it started then. Full account: <a href="https://africasprotopia.substack.com/p/the-foundations-of-african-ai" target="_blank" rel="noopener">The Foundations of African AI</a>.</p>
 <p><em>Source: <a href="https://africasprotopia.substack.com/p/the-foundations-of-african-ai" target="_blank" rel="noopener">The Foundations of African AI</a>, which links each event.</em></p>
 <div class="table-wrap"><table class="cols-3">
@@ -891,14 +1021,32 @@
 </tr>
 </tbody>
 </table>
-</div><p><strong>Why it's in the Ledger:</strong> none of the capital, compute or startup activity tracked above is a green-field event. It's the newest layer on three decades of mostly self-funded infrastructure that predates the 2025 pledge cycle by up to thirty-one years (SAT-3/WASC, 2001, vs. the Kigali declaration, 2025).</p>
+</div><p><strong>Why it's in the Ledger:</strong> none of the capital, compute or startup activity tracked above is a green-field event. It's the newest layer on three decades of mostly self-funded infrastructure that predates the 2025 pledge cycle by up to thirty-one years (South Africa's first cellular networks, 1994, vs. the Kigali declaration, 2025).</p>
+    <section id="faq"><h2>Frequently asked questions</h2><h3>How much AI investment has actually been deployed in Africa?</h3>
+<p>Announced continental AI commitments exceed US$70bn. Verifiable deployed AI-specific capital, including infrastructure capex, is on the order of US$1–2bn. Most of what is deployed is corporate infrastructure spending (Cassava, Google, Microsoft South Africa, the Nigerian data centres) and philanthropic programme money (Gates, IDRC, UNDP).</p>
+<h3>How many African AI startups are active?</h3>
+<p>TechCabal Insights, analysing Dr Chinasa T. Okolo's dataset, tracked 207 AI companies across 17 countries in 2025, and 86% are still active. Nigeria (50), South Africa (49) and Kenya (31) hold 63% of them. Other counts differ by definition: StartupList finds 159, and AfriLabs reports 2,400+ under a much looser test.</p>
+<h3>Why do published figures on African AI disagree?</h3>
+<p>Mostly because sources count different things. Egypt has 11 AI-first startups or 44 AI-enabled ones. Partech puts 2025 venture capital at US$4.1bn and AVCA at US$3.9bn because of deal-inclusion rules. The IMF gives about 160 and 213 data centres on the same page, from two sources. The Ledger keeps both numbers and says why they diverge.</p>
+<h3>Has the US$60bn Africa AI Fund raised any money?</h3>
+<p>No legal vehicle, capital call or first close has been found. In Accra in September 2026, Smart Africa cited US$18.7bn; its own written post describes that as a blended finance architecture. Public reporting reviewed as of 2 October 2026 gives no breakdown of money committed or paid in, so the Ledger carries it as structure, not capital.</p>
+<h3>How much data-centre capacity does Africa have?</h3>
+<p>The IMF puts sub-Saharan Africa's installed IT capacity at about 0.4 GW, under 1% of the global total. The African Data Centres Association counts 360 MW active and 0.6% of global. Capacity is expected to roughly triple to about 1.2 GW by 2030 with no gain in global share; the United States alone holds close to 45%.</p>
+<h3>Which African countries have a national AI strategy?</h3>
+<p>At least 16 have published or adopted one, including Mauritius (2018, Africa's first), Rwanda, Senegal, Egypt, Kenya, Nigeria and Ghana. The DRC, Uganda, Tanzania and others are drafting. South Africa withdrew its draft policy in April 2026. The African Union endorsed a Continental AI Strategy in July 2024.</p>
+<h3>How much funding goes to women-led African startups?</h3>
+<p>Startups with a female CEO received 2.2% of funding in 2025, the lowest share since tracking began in 2019, according to Africa: The Big Deal. In Q1–Q3 2026 the share was 5.4%, or about 2% without one large deal. Meanwhile 19.2% of startups have at least one female co-founder.</p>
+<h3>How is the Said &amp; Done Ledger sourced and updated?</h3>
+<p>No figure enters the Ledger without a source, and contested figures are never silently reconciled: both numbers stay, with the reason they diverge. The Ledger is updated quarterly. Replaced figures stay on the page, struck through, and every version keeps its own address.</p>
+</section>
     <section id="changelog"><h2>Changelog</h2><p>What changed in each version. From v1.0 on, replaced figures stay on the page, struck through, so you can see what changed. Every earlier version also stays readable at its own address.</p><ul class="changelog"><li><strong>v1.0</strong> — First public version, live at ledger.protopia.africa (2026-11-16). Every row now carries a public source. Adds the UAE's US$1bn AI for Development initiative, Enza Capital's AI Africa Fund, Ghana's 2027 budget line, Q1–Q3 2026 funding and gender figures, Morocco's AI ministry and Kenya's AI Bill; updates Stratos Lab, Aeonian and One Million Coders; logs the 16 Nov check of the GPU Access Framework and Yamify's paused deployments.</li></ul></section>
   </main>
 </div>
 <footer>
   <p>The Said &amp; Done Ledger is kept by <a href="https://africasprotopia.substack.com">Africa's Protopia</a>.
+  Compiled by <a href="https://substack.com/@ivanirakoze">Ivan Irakoze</a>.
   Spotted an error or a newer figure? Write to <a href="mailto:hello@protopia.africa">hello@protopia.africa</a>.</p>
-  <p class="small">Built 2026-11-16 · v1.0</p>
+  <p class="small">Built 2026-11-24 · v1.0</p>
 </footer>
 </body>
 </html>

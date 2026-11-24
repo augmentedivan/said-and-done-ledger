@@ -76,6 +76,11 @@ td:first-child { font-weight: 700; color: var(--indigo); }
 table.cols-2 td:first-child { width: 38%; }
 table.cols-4, table.cols-5 { min-width: 44rem; }
 
+/* answer blocks + FAQ */
+.updated { margin: .6rem 0 0; font-size: .875rem; opacity: .85; }
+.answer { font-size: 1.08rem; line-height: 1.6; color: var(--indigo); padding-left: 1rem; border-left: 3px solid var(--terracotta); }
+#faq h3, #faq p { max-width: var(--measure); }
+
 /* changelog + footer */
 .changelog { padding-left: 1.1rem; font-size: .92rem; }
 .changelog li { margin-bottom: .8rem; }

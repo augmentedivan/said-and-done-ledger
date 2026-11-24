@@ -7,6 +7,8 @@ a static site in ./docs, ready for GitHub Pages at ledger.protopia.africa.
     python3 build.py            # build docs/ from the vault file
     python3 build.py --check    # build, then exit 1 if the public-hygiene lint finds anything
 
+Answer blocks and the FAQ come from answers.py, checked against the note on every build.
+
 What it does to the note on the way out:
   * keeps everything from "## 1." onwards, minus the "Update protocol" section and any
     block wrapped in <!-- public:skip --> ... <!-- /public:skip -->
@@ -29,6 +31,8 @@ import markdown
 from markdown.treeprocessors import Treeprocessor
 from markdown.extensions import Extension
 
+import answers
+
 HERE = Path(__file__).resolve().parent
 # Where the vault's Africa's Protopia folder lives. Kept out of the public repo:
 # set PROTOPIA_PROJECT, or put the path in .project-path (git-ignored).
@@ -39,7 +43,29 @@ if not PROJECT.is_dir():
 SOURCE = PROJECT / "Research" / "The Said & Done Ledger.md"
 SITE = HERE / "docs"  # GitHub Pages serves main:/docs
 DOMAIN = "ledger.protopia.africa"
-SUBSTACK = "https://africasprotopia.substack.com"
+LEDGER_URL = f"https://{DOMAIN}/"
+
+# The one place the Substack address lives. When the custom domain is switched on,
+# change this to "https://protopia.africa" and rebuild: every Substack link on the page,
+# including old africasprotopia.substack.com links in the note, follows it.
+SUBSTACK_URL = "https://africasprotopia.substack.com"
+SUBSTACK_OLD = "https://africasprotopia.substack.com"  # links in the note use this; rewritten to SUBSTACK_URL
+
+# Structured data (JSON-LD) identity. The @ids are permanent labels, not pages to visit:
+# never change them, or search engines lose the link between old and new versions.
+ORG_ID = f"{LEDGER_URL}#organization"
+DATASET_ID = f"{LEDGER_URL}#dataset"
+PERSON_ID = f"{LEDGER_URL}#ivan-irakoze"
+FAQ_ID = f"{LEDGER_URL}#faq"
+PERSON_NAME = "Ivan Irakoze"
+PERSON_PROFILE = "https://substack.com/@ivanirakoze"  # his Substack profile, as linked on the About page
+PERSON_LINKEDIN = "https://www.linkedin.com/in/ivan-irakoze/"  # confirmed by Ivan, 2026-11-24
+# The one-line description of Africa's Protopia used in the structured data (chosen by Ivan, 2026-11-24).
+PUBLICATION_DESCRIPTOR = (
+    "Africa's Protopia follows sovereign African AI from announcement to deployment, "
+    "and the people turning African opportunities into working systems."
+)
+
 SKIP_SECTIONS = {"Update protocol", "Change history"}  # vault-only
 
 # Phrases that belong in the vault but not on a public page. Each hit is a line to fix
@@ -159,6 +185,49 @@ def to_html(md_text):
     return body, md.toc_tokens
 
 
+# ---------- answer blocks + FAQ (text lives in answers.py) ----------
+
+NUM = re.compile(r"\d+(?:[.,]\d+)*")
+
+
+def esc(text):
+    return html.escape(text, quote=False)
+
+
+def fill(text, meta):
+    return text.format(ledger=f"the Said & Done Ledger {meta['version']}")
+
+
+def add_answer_blocks(body_html, meta):
+    """Put each section's answer block straight under its numbered H2."""
+    def put(m):
+        text = answers.ANSWER_BLOCKS.get(int(m.group(2)))
+        return m.group(1) + (f'\n<p class="answer">{esc(fill(text, meta))}</p>' if text else "")
+    return re.sub(r'(<h2 id="[^"]+">(\d+)\. .*?</h2>)', put, body_html, flags=re.S)
+
+
+def check_answers(meta, public_md):
+    """Guard rails for answers.py: right version, 40–60 words, no number the page doesn't carry."""
+    problems = []
+    if meta["version"] != answers.FOR_VERSION:
+        problems.append(f"answers.py was checked against {answers.FOR_VERSION}, the note is now "
+                        f"{meta['version']}: re-read every answer and FAQ line, then bump FOR_VERSION")
+    on_page = set(NUM.findall(public_md))
+    sections = {int(n) for n in re.findall(r"(?m)^## (\d+)\.", public_md)}
+    for n in sorted(sections - answers.ANSWER_BLOCKS.keys()):
+        problems.append(f"section {n} has no answer block")
+    items = [(f"answer §{n}", t, True) for n, t in answers.ANSWER_BLOCKS.items()]
+    items += [(f"FAQ '{q[:40]}'", q + " " + a, False) for q, a in answers.FAQ]
+    for label, text, is_block in items:
+        words = len(fill(text, meta).split())
+        if is_block and not 40 <= words <= 60:
+            problems.append(f"{label} is {words} words (want 40–60)")
+        for num in NUM.findall(text):
+            if num not in on_page:
+                problems.append(f"{label} uses {num}, which is not in the Ledger note")
+    return problems
+
+
 # ---------- page ----------
 
 def render(meta, body_html, toc_tokens, archived=False):
@@ -185,21 +254,58 @@ def render(meta, body_html, toc_tokens, archived=False):
         f'<p class="archived">You are reading <strong>{v}</strong>, an archived version. '
         f'<a href="/">Read the current Ledger</a>.</p>' if archived else ""
     )
-    jsonld = {
-        "@context": "https://schema.org",
-        "@type": "Dataset",
-        "name": "The Said & Done Ledger",
-        "alternateName": "The Said & Done Ledger by Africa's Protopia",
-        "description": "What African AI was promised, and what got built: announced vs. deployed capital, "
-                       "compute online, startup counts, national AI strategies, and a register of contested "
-                       "figures with the reason each pair diverges.",
-        "url": canonical,
-        "version": v.lstrip("v"),
-        "dateModified": as_of,
-        "spatialCoverage": "Africa",
-        "isAccessibleForFree": True,
-        "creator": {"@type": "Organization", "name": "Africa's Protopia", "url": SUBSTACK},
-    }
+    faq = [(q, a) for q, a in answers.FAQ]
+    faq_section = (
+        '<section id="faq"><h2>Frequently asked questions</h2>'
+        + "".join(f"<h3>{esc(q)}</h3>\n<p>{esc(a)}</p>\n" for q, a in faq)
+        + "</section>"
+    )
+    jsonld = {"@context": "https://schema.org", "@graph": [
+        {
+            "@type": "Organization",
+            "@id": ORG_ID,
+            "name": "Africa's Protopia",
+            "url": SUBSTACK_URL,
+            "description": PUBLICATION_DESCRIPTOR,
+            "logo": f"{LEDGER_URL}assets/logo.png",
+            "sameAs": [SUBSTACK_URL, LEDGER_URL],
+        },
+        {
+            "@type": "Person",
+            "@id": PERSON_ID,
+            "name": PERSON_NAME,
+            "url": PERSON_PROFILE,
+            "sameAs": [PERSON_PROFILE] + ([PERSON_LINKEDIN] if PERSON_LINKEDIN else []),
+        },
+        {
+            "@type": "Dataset",
+            "@id": DATASET_ID,
+            "name": "The Said & Done Ledger",
+            "alternateName": "The Said & Done Ledger by Africa's Protopia",
+            "description": "What African AI was promised, and what got built: announced vs. deployed capital, "
+                           "compute online, startup counts, national AI strategies, and a register of contested "
+                           "figures with the reason each pair diverges.",
+            "url": canonical,
+            "version": v.lstrip("v"),
+            "dateModified": as_of,
+            "spatialCoverage": "Africa",
+            "isAccessibleForFree": True,
+            "creator": {"@id": PERSON_ID},
+            "publisher": {"@id": ORG_ID},
+        },
+        {
+            "@type": "FAQPage",
+            "@id": f"{canonical}#faq",
+            "url": canonical,
+            "about": {"@id": DATASET_ID},
+            "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                for q, a in faq
+            ],
+        },
+    ]}
+    # "</" inside a <script> block could end it early; JSON allows "<\/" as the same text.
+    jsonld_text = json.dumps(jsonld, ensure_ascii=False, indent=1).replace("</", "<\\/")
 
     return f"""<!doctype html>
 <html lang="en-GB">
@@ -216,33 +322,38 @@ def render(meta, body_html, toc_tokens, archived=False):
 <link rel="icon" href="{prefix}assets/logo.png">
 <link rel="preload" href="{prefix}assets/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{prefix}assets/ledger.css">
-<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
+<script type="application/ld+json">
+{jsonld_text}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the Ledger</a>
 <header class="masthead">
   <div class="masthead-inner">
-    <a class="brand" href="{SUBSTACK}">Africa's Protopia</a>
+    <a class="brand" href="{SUBSTACK_URL}">Africa's Protopia</a>
     <h1>The Said &amp; Done Ledger</h1>
     <p class="dek">What African AI was promised, and what got built.</p>
     <p class="stamp"><span class="ver">{v}</span> <span>Data as of {as_of_h}</span> <span>Updated quarterly</span></p>
+    <p class="updated">Last updated <time datetime="{as_of}">{as_of_h}</time></p>
     {banner}
   </div>
 </header>
 <div class="layout">
   <nav class="toc" aria-label="Sections">
     <p class="toc-title">Sections</p>
-    <ol>{toc}{changelog_toc}</ol>
-    <a class="subscribe" href="{SUBSTACK}/subscribe">Get each update by email</a>
+    <ol>{toc}<li><a href="#faq">Frequently asked questions</a></li>{changelog_toc}</ol>
+    <a class="subscribe" href="{SUBSTACK_URL}/subscribe">Get each update by email</a>
   </nav>
   <main id="main">
     <div class="rule">{rule}</div>
-    {body_html}
+    {add_answer_blocks(body_html, meta)}
+    {faq_section}
     {changelog_section}
   </main>
 </div>
 <footer>
-  <p>The Said &amp; Done Ledger is kept by <a href="{SUBSTACK}">Africa's Protopia</a>.
+  <p>The Said &amp; Done Ledger is kept by <a href="{SUBSTACK_URL}">Africa's Protopia</a>.
+  Compiled by <a href="{PERSON_PROFILE}">{PERSON_NAME}</a>.
   Spotted an error or a newer figure? Write to <a href="mailto:hello@protopia.africa">hello@protopia.africa</a>.</p>
   <p class="small">Built {dt.date.today().isoformat()} · {v}</p>
 </footer>
@@ -300,6 +411,9 @@ def main():
     meta["changelog"] = [(v, re.sub(r"^W\d{1,2} ", "", resolve_wikilinks(t, links, warnings)))
                          for v, t in meta["changelog"] if int(v.lstrip("v").split(".")[0]) >= 1]
     body = re.sub(r"(?m)^---\s*$", "", body)  # section rules come from CSS instead
+    # Point every Substack link at the current address (see SUBSTACK_URL).
+    body = body.replace(SUBSTACK_OLD, SUBSTACK_URL)
+    meta["changelog"] = [(v, t.replace(SUBSTACK_OLD, SUBSTACK_URL)) for v, t in meta["changelog"]]
 
     body_html, toc_tokens = to_html(body)
 
@@ -324,8 +438,14 @@ def main():
         arch.mkdir(parents=True, exist_ok=True)
         (arch / "index.html").write_text(render(meta, body_html, toc_tokens, archived=True), encoding="utf-8")
 
-    hits = lint(body + "\n".join(t for _, t in meta["changelog"]))
+    extra = list(answers.ANSWER_BLOCKS.values()) + [q + " " + a for q, a in answers.FAQ]
+    hits = lint(body + "\n".join(t for _, t in meta["changelog"]) + "\n" + "\n".join(extra))
+    answer_problems = check_answers(meta, body)
     print(f"Built {meta['version']} (data as of {meta['as_of']}) -> {SITE}/index.html")
+    print(f"  {len(answers.ANSWER_BLOCKS)} answer blocks, {len(answers.FAQ)} FAQ entries; "
+          f"{len(answer_problems)} problems:")
+    for p in answer_problems:
+        print("   !", p)
     unsourced = unsourced_rows(body)
     print(f"  {len(unsourced)} table rows carry no source link:")
     for ln in unsourced:
@@ -336,7 +456,7 @@ def main():
         print(f"  {len(hits)} public-hygiene hits (fix in the vault note):")
         for why, line in hits:
             print(f"   - {why}: {line}")
-    if args.check and (hits or warnings or unsourced):
+    if args.check and (hits or warnings or unsourced or answer_problems):
         sys.exit(1)
 
 
